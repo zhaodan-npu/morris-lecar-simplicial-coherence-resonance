@@ -1,0 +1,4 @@
+# Preserve source/data bytes so provenance hashes survive cross-platform clones.
+* -text
+*.sh text eol=lf
+*.npz binary

@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+*.pem
+*.key
+results/
+logs/
+paper_suite_*/
+paired_alpha_*/
+bifurcation_analysis/
+*.log
+slurm-*.out
+.DS_Store
+Thumbs.db

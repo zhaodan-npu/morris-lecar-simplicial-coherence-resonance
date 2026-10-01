@@ -1,0 +1,236 @@
+{
+  "scope": "First-paper numerical code and selected reference outputs",
+  "files": [
+    {
+      "file": "morris_lecar_paired_alpha_compare_simplicial.py",
+      "source_relative_path": "morris_lecar_paired_alpha_compare_simplicial.py",
+      "sha256": "783443b107b7872f246c471d929ac6f1e4c2e5db7cfd485316d71f0d78a458e4",
+      "bytes": 17843,
+      "copied_without_modification": true
+    },
+    {
+      "file": "morris_lecar_simplicial_paper_suite.py",
+      "source_relative_path": "morris_lecar_simplicial_paper_suite.py",
+      "sha256": "786d29165845c220cdd31fa43b1ea51903fe3dcea265a2830005bc1730d85a8b",
+      "bytes": 16401,
+      "copied_without_modification": true
+    },
+    {
+      "file": "morris_lecar_simplicial_paper_array.py",
+      "source_relative_path": "morris_lecar_simplicial_paper_array.py",
+      "sha256": "2ce11febb6a2c8ae7567ce648502487f253d9d224fc7aec319969c50a9165438",
+      "bytes": 7896,
+      "copied_without_modification": true
+    },
+    {
+      "file": "morris_lecar_simplicial_paper_array_chunked.py",
+      "source_relative_path": "morris_lecar_simplicial_paper_array_chunked.py",
+      "sha256": "f9deea67181bb560b4a804ddefbee80caf24f61d3de93367a28a51c684d26d79",
+      "bytes": 6988,
+      "copied_without_modification": true
+    },
+    {
+      "file": "morris_lecar_simplicial_prl_supplement_array.py",
+      "source_relative_path": "morris_lecar_simplicial_prl_supplement_array.py",
+      "sha256": "a448f0d137887f1fe3f10aa853636c50c97560d08a050cc5228300d477b1c76b",
+      "bytes": 6718,
+      "copied_without_modification": true
+    },
+    {
+      "file": "morris_lecar_simplicial_sigma2_noise_phase_array.py",
+      "source_relative_path": "morris_lecar_simplicial_sigma2_noise_phase_array.py",
+      "sha256": "9626215f16fe71b46e26764cd754eea2a936b4741b760dcb5c949d451de60747",
+      "bytes": 7938,
+      "copied_without_modification": true
+    },
+    {
+      "file": "morris_lecar_simplicial_mechanism_supplement_array.py",
+      "source_relative_path": "morris_lecar_simplicial_mechanism_supplement_array.py",
+      "sha256": "486ae76e5ad0459dc33d2314285882eb543a4a54e3add3dd35a4306734648114",
+      "bytes": 17743,
+      "copied_without_modification": true
+    },
+    {
+      "file": "morris_lecar_simplicial_matched_coupling_array.py",
+      "source_relative_path": "morris_lecar_simplicial_matched_coupling_array.py",
+      "sha256": "a563f1015807cb2a453c73c1ae6ebc5a696f8cb077f424e15bb4f813521bd45c",
+      "bytes": 7663,
+      "copied_without_modification": true
+    },
+    {
+      "file": "morris_lecar_simplicial_dt_convergence_array.py",
+      "source_relative_path": "morris_lecar_simplicial_dt_convergence_array.py",
+      "sha256": "fbf03f3b3a79419785a133a720785b9b6bff35dd34ff6725d997f52d41135f1e",
+      "bytes": 4008,
+      "copied_without_modification": true
+    },
+    {
+      "file": "morris_lecar_voltage_coherence.py",
+      "source_relative_path": "morris_lecar_voltage_coherence.py",
+      "sha256": "17a57ba804427612eec5f9fc0a03874b9a508a1c35a762f0d8195800c89f217f",
+      "bytes": 27310,
+      "copied_without_modification": true
+    },
+    {
+      "file": "morris_lecar_voltage_coherence_true.py",
+      "source_relative_path": "morris_lecar_voltage_coherence_true.py",
+      "sha256": "7d680015bc43050281d6159f8c19adf7476ff710bf357d11f4f7fa41e5928097",
+      "bytes": 27588,
+      "copied_without_modification": true
+    },
+    {
+      "file": "morris_lecar_hopf_distance_analysis.py",
+      "source_relative_path": "morris_lecar_hopf_distance_analysis.py",
+      "sha256": "3204ec8f8d1463c2d62a0d0cfa819406464d5ca5bca0304be161a9b8747e27c2",
+      "bytes": 15047,
+      "copied_without_modification": true
+    },
+    {
+      "file": "merge_morris_lecar_simplicial_chunks.py",
+      "source_relative_path": "merge_morris_lecar_simplicial_chunks.py",
+      "sha256": "334bb1bd1e7074d02f6e3797dbf554878023da4fc2d9c12b90f3ec7e956082a2",
+      "bytes": 3215,
+      "copied_without_modification": true
+    },
+    {
+      "file": "merge_prl_supplement_chunks.py",
+      "source_relative_path": "merge_prl_supplement_chunks.py",
+      "sha256": "f3a23d29447fc951daced68f80001cf9e97ebdf1971bb67bb5daa569edc3b681",
+      "bytes": 1080,
+      "copied_without_modification": true
+    },
+    {
+      "file": "merge_plot_matched_coupling_control.py",
+      "source_relative_path": "merge_plot_matched_coupling_control.py",
+      "sha256": "57b5504f532e395dbbc512d4dbe361b7e3a11e4c0d835f6be4970f6ee486848a",
+      "bytes": 13681,
+      "copied_without_modification": true
+    },
+    {
+      "file": "aggregate_true_correlation_time.py",
+      "source_relative_path": "aggregate_true_correlation_time.py",
+      "sha256": "4b88d1b7b7f1985aef12c7a165edc0ed827624803d53cbf5b20786a9ac5054bd",
+      "bytes": 9022,
+      "copied_without_modification": true
+    },
+    {
+      "file": "analyze_true_correlation_time_debiased.py",
+      "source_relative_path": "analyze_true_correlation_time_debiased.py",
+      "sha256": "4240f03995ed2d804cf8b2608c1f54c26974c8559028db2fb7cbb4876687d48e",
+      "bytes": 12158,
+      "copied_without_modification": true
+    },
+    {
+      "file": "plot_sigma2_noise_phase_diagram.py",
+      "source_relative_path": "plot_sigma2_noise_phase_diagram.py",
+      "sha256": "5afdeeafe6815c50f75cbb6b06a640b247b1fe9f2040645a849b88605cf933df",
+      "bytes": 15296,
+      "copied_without_modification": true
+    },
+    {
+      "file": "plot_mechanism_supplement.py",
+      "source_relative_path": "plot_mechanism_supplement.py",
+      "sha256": "4c016cf446c0d8febec36a95f50c16a9de7f16f7bade4db01f3264b3e124ee44",
+      "bytes": 28304,
+      "copied_without_modification": true
+    },
+    {
+      "file": "plot_figure1_dynamics_revised.py",
+      "source_relative_path": "plot_figure1_dynamics_revised.py",
+      "sha256": "cee5a52eeebcc72fd73cedb4460f5114a2eff89de9ea0c7f28e72d34b86ee5a4",
+      "bytes": 13694,
+      "copied_without_modification": true
+    },
+    {
+      "file": "plot_alpha_noise_cv_panel_like_reference.py",
+      "source_relative_path": "plot_alpha_noise_cv_panel_like_reference.py",
+      "sha256": "4dca16ca4eb7bb4cb38b1790a99e73969522fea84feada2e1f330dd6537fdb89",
+      "bytes": 14780,
+      "copied_without_modification": true
+    },
+    {
+      "file": "plot_dt_convergence_control.py",
+      "source_relative_path": "plot_dt_convergence_control.py",
+      "sha256": "cfb5485fcc61f89a4bb536db394aac8f855d35448e91134ea2d3a3468fee77bb",
+      "bytes": 7890,
+      "copied_without_modification": true
+    },
+    {
+      "file": "parameters/main.json",
+      "source_relative_path": "paper_suite_true_simplicial_array_prl_N100_Dv_refined/candidate39_main/chunks/network_000/parameters.json",
+      "sha256": "aa62e049c22bee203c2e0671440889af996c99ea83eeab27b346bf288c05f2f4",
+      "bytes": 734,
+      "copied_without_modification": true
+    },
+    {
+      "file": "parameters/structure_N100.json",
+      "source_relative_path": "paper_suite_true_simplicial_prl_supplement_Dv/size_N100/chunks/network_000/parameters.json",
+      "sha256": "d6cdb1989a8f4a456f6ac16c40c64f08eb22462cf94ba2070294246a4c900583",
+      "bytes": 734,
+      "copied_without_modification": true
+    },
+    {
+      "file": "parameters/mechanism.json",
+      "source_relative_path": "paper_suite_mechanism_supplement_Dv_exp1_full_Dv030/chunks/network_000/parameters.json",
+      "sha256": "2ac584808720b5a5e8c78e7bd324be863115d9376fe4fc46d1c7f55af51a4113",
+      "bytes": 664,
+      "copied_without_modification": true
+    },
+    {
+      "file": "reference_data/main_cv.csv",
+      "source_relative_path": "paper_suite_true_simplicial_array_prl_N100_Dv_refined/candidate39_main/aggregated_metrics.csv",
+      "sha256": "a736df3f97380d2fadeeb3c4209c0ea488faac69e9f558f1c00844aca647ab69",
+      "bytes": 21037,
+      "copied_without_modification": true
+    },
+    {
+      "file": "reference_data/optimal_sigma2.csv",
+      "source_relative_path": "revision_reviewer1/figure5/analysis/plot_data.csv",
+      "sha256": "1df3588742fb290c486f2f6a031f7637d78ce417f0a15012c21605f11d09e791",
+      "bytes": 5137,
+      "copied_without_modification": true
+    },
+    {
+      "file": "reference_data/optimal_structure.csv",
+      "source_relative_path": "revision_reviewer1/figure7/analysis/plot_data.csv",
+      "sha256": "320de8c57139f00ef7fd75f7dc83c448b177e233b75b22787dacbf6f4fcf6f92",
+      "bytes": 2623,
+      "copied_without_modification": true
+    },
+    {
+      "file": "reference_data/optimal_alpha.csv",
+      "source_relative_path": "revision_reviewer1/figure8/analysis/plot_data.csv",
+      "sha256": "42d5667b9235a246daa9cd2c5b30c321d6180c10bfa38164a57fc5a36f254ef4",
+      "bytes": 331,
+      "copied_without_modification": true
+    },
+    {
+      "file": "reference_data/phase_diagram.npz",
+      "source_relative_path": "revision_reviewer1/figure6/analysis/plot_data.npz",
+      "sha256": "ce4c251fcb78868bc2d2e0b06edcb350fccb1a7692cb4b587b25bc8282ad3121",
+      "bytes": 41405,
+      "copied_without_modification": true
+    },
+    {
+      "file": "reference_data/activation_excursion.csv",
+      "source_relative_path": "revision_reviewer1/figure9/analysis/plot_data.csv",
+      "sha256": "c16cfb68102cc2bc5a0910ce357f56d3712d123a8a308dc2c3ab06c8d33b30b3",
+      "bytes": 17700,
+      "copied_without_modification": true
+    },
+    {
+      "file": "reference_data/variance_fractions.csv",
+      "source_relative_path": "revision_reviewer1/figure10/analysis/plot_data.csv",
+      "sha256": "3465e2b6cc3e62d8d150c115da15767744671c987aa0d760006656fc764cc8e0",
+      "bytes": 23445,
+      "copied_without_modification": true
+    },
+    {
+      "file": "reference_data/spike_correlations.csv",
+      "source_relative_path": "revision_reviewer1/figure11/analysis/plot_data.csv",
+      "sha256": "ab45c7fa92e7601297a3251aad0f907fccda3771c0cbb07693bd21c85bdf8fe0",
+      "bytes": 13840,
+      "copied_without_modification": true
+    }
+  ]
+}
