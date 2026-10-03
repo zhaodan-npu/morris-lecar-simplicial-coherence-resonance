@@ -78,13 +78,15 @@ after pooling intervals across all trajectories. Missing CVs are not zeros.
 CV* is a minimum over the retained discrete noise grid of the ensemble mean
 CV. Historical summaries use a minimum mean total spike count of 5; main
 figure optimum markers use 1000 and phase-diagram masking uses 100. These
-are distinct existing analysis settings. Do not silently substitute one for
-another. Counts refer to the full network per trajectory, not each neuron.
+are distinct analysis settings. Counts refer to the full network per trajectory,
+not each neuron.
 
 Stored `isi_cv_std` is the across-trajectory sample standard deviation. The
 original main CV plot used `std/sqrt(total_realizations)`, not a 95% bootstrap
 interval. The later coupling-control analysis has a different bootstrap
-procedure. Do not label all uncertainty bars with one common definition.
+procedure: 20000 paired-network bootstrap resamples, with pointwise percentile
+95% intervals. The same resampled networks are used across conditions and noise
+points; the eligibility rule is reapplied when selecting bootstrap minima.
 
 ## Full Experiment Commands
 
@@ -125,9 +127,9 @@ Additional one-task examples (repeat the indicated ID range):
 | Phase duration and synchrony | `python morris_lecar_simplicial_mechanism_supplement_array.py 0 30 --output-root results/mechanism` | 0--29 |
 | dt=0.01 check | `python morris_lecar_simplicial_dt_convergence_array.py 0 30 --output-root results/dt_check` | 0--29 |
 
-Analysis tools expose their path arguments with `--help`. The original plotting
-scripts retain historical figure numbering and layout; they are not advertised
-as the final revision's typography. For example:
+Analysis tools expose their path arguments with `--help`. Root-level plotting
+scripts retain historical numbering and layout; `figures/render.py` renders the
+revised figures. For example:
 
 ```sh
 python merge_prl_supplement_chunks.py --output-root results/supplement --min-spikes 5
@@ -157,19 +159,26 @@ Current figure numbering is used below; older script names may differ.
 | --- | --- |
 | 2 | `plot_figure1_dynamics_revised.py`, `plot_alpha_noise_cv_panel_like_reference.py`; short illustrations are separate from production statistics |
 | 3(a-d) | main production driver; `reference_data/main_cv.csv` |
-| 3(e-f) | voltage-correlation estimator variants; exact final-panel output not identified |
-| 4 | matched-coupling driver and merge/analysis script; full raw control archive not bundled |
+| 3(e-f) | voltage-correlation estimator variants; recovered coordinates in `figure3.csv`, matching raw output not identified |
+| 4 | matched-coupling driver; `checks/analyze_comment2.py`; `matched_*.csv` summaries |
 | 5 | sigma2 jobs; `reference_data/optimal_sigma2.csv` |
 | 6 | phase driver; `reference_data/phase_diagram.npz` |
 | 7--8 | supplement driver; `optimal_structure.csv`, `optimal_alpha.csv` |
 | 9--11 | mechanism driver; `activation_excursion.csv`, `variance_fractions.csv`, `spike_correlations.csv` |
 
 The two voltage-correlation modules and the debiasing analysis implement distinct
-estimators. The current figure-restyling work recovered the final displayed
-correlation-time curves from PDF vector paths because an exact matching source
-table had not been found. Such recovered coordinates are not included here as
-raw simulation output. Reconcile that provenance before claiming full numerical
-reproduction of every panel. No new simulation is claimed to resolve it.
+estimators. Figure 3(e,f) was recovered from PDF vector paths because an exact
+matching source table had not been found. Those coordinates are bundled solely
+for redrawing, with the provenance flag in `figure3_metadata.json` and a warning
+from the renderer. They are not raw simulation output. The original extraction
+procedure is retained in `checks/prepare_figure3.py`.
+
+See CODE_MAP.md for the complete result-to-code map and required archive inputs.
+The portable equivalence check uses the saved parameters and metadata for all
+30 original networks. It runs both full-duration diagnostic cases and preserves
+the original 1e-6 voltage-error warning; algebraic equivalence is not inferred
+from a floating-point tolerance. The low-activity checks do not establish
+timestep convergence or prove that the entire low-noise peak is an artifact.
 
 ## Packaging Validation
 

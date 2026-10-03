@@ -1,76 +1,81 @@
-# Morris-Lecar Simplicial Networks: Coherence Resonance
+# Coherence Resonance in Simplicial Morris-Lecar Networks
 
-Numerical code for studying coherence resonance in stochastic Morris-Lecar
-networks with pairwise and simplex-derived linear coupling under alpha-stable
-Levy noise. This repository concerns the coherence-resonance study only.
+Simulation and analysis code for Morris-Lecar networks driven by alpha-stable
+Levy noise. The network is constructed by filling selected triangles of an
+Erdos-Renyi graph. The linear simplex coupling used here has an exact weighted
+pairwise representation; its weights depend on filled-triangle multiplicities.
 
-This is a pre-publication code snapshot. Repository ownership, the reuse license,
-and the manuscript citation must be confirmed before the public release.
+## Installation
 
-## Install and Test
-
-Use Python 3.11 or newer in a virtual environment:
+Use Python 3.11 or later. Create and activate a virtual environment, then run:
 
 ```sh
-python -m venv .venv
 python -m pip install -r requirements.txt
 python -m unittest discover -s tests -v
-python reproduce.py smoke
 ```
 
-Activate the virtual environment before the second command. The smoke test uses
-small, explicitly labeled demonstration parameters. It verifies execution only;
-it is not a replacement for the manuscript's production ensemble.
+Publication figures use Times New Roman. Install that font before rendering;
+the plotting routines check its availability instead of silently substituting it.
 
-## Entry Points
+## Reproduce Figures
+
+```sh
+python figures/render.py --figure all
+python figures/render.py --figure 7
+```
+
+These commands use the bundled reference inputs and export separate PDF and
+600-dpi PNG panels under `results/figures/`. They do not rerun the ensemble.
+The entry point uses the revised plotting routines, including the corrected
+CV notation and external legends. Root-level `plot_*.py` files retain the
+earlier analysis layouts and historical figure numbering.
+
+Figure 3(e,f) is an exception to numerical reproducibility: the bundled curves
+were recovered from PDF vector coordinates. The matching raw correlation-time
+table has not been identified. Redrawing those panels does not validate their
+underlying estimator. This distinction is recorded in the figure metadata.
+
+## Run Simulations and Checks
 
 ```sh
 python reproduce.py list
 python reproduce.py parameters
-python reproduce.py run-network --family main --experiment candidate39_main --network 0
+python reproduce.py run-network --experiment candidate39_main --network 0
+python checks/run.py equivalence
 ```
 
-The final command runs one full-size production network and can be expensive.
-For the main experiment, run network indices 0--29. The production defaults are
-not shortened by this entry point. Every run records its actual parameters.
+The production command runs one network with the original parameters. Complete
+the 30 network indices before merging the main ensemble. The equivalence check
+audits all 30 original network structures and compares two independent coupling
+implementations on the first network at two specified noise conditions.
 
-See [REPRODUCIBILITY.md](REPRODUCIBILITY.md) for equations, ensemble semantics,
-noise grids, full experiment commands, and known reproduction boundaries.
+For a short installation check only: `python reproduce.py smoke`.
 
-## Contents
+## Repository Structure
 
-- `morris_lecar_paired_alpha_compare_simplicial.py`: topology construction,
-  stochastic integration, paired noise, spike detection, and pooled-ISI CV.
-- `morris_lecar_simplicial_*`: production, robustness, phase-diagram, mechanism,
-  timestep, and coupling-strength control drivers.
-- `morris_lecar_voltage_coherence*.py`: voltage correlation/spectral estimators.
-- `morris_lecar_hopf_distance_analysis.py`: deterministic working-point analysis.
-- `merge_*.py`, `aggregate_*.py`, `analyze_*.py`, `plot_*.py`: original analysis
-  utilities; their dataset arguments and historical output names are retained.
-- `parameters/`: parameter files copied from actual saved production runs.
-- `reference_data/`: selected numerical outputs, not the full trajectory archive.
-- `SOURCE_MANIFEST.json`: SHA-256 provenance for the unmodified source snapshot.
-- `slurm/run_main.sh`: a generic array example with no institutional credentials.
+| Location | Contents |
+| --- | --- |
+| Root numerical modules | Model, full simulation drivers, mergers and original analyses |
+| `figures/` | Revised figure routines and the portable rendering entry point |
+| `checks/` | Coupling equivalence, matched-control statistics and low-activity diagnostics |
+| `parameters/` | Parameter records from saved production runs |
+| `reference_data/` | Figure inputs, numerical summaries and original network metadata |
+| `tests/` | Model, parameter, import and input-integrity tests |
+| `slurm/` | Cluster-independent submission template |
 
-The original numerical source files are copied without changing their equations,
-random-seed rules, clipping, grid, or estimators. Convenience wrappers and tests
-are additional files. Historical standalone defaults in the low-level model are
-not the manuscript parameters; use the production entry points above.
+[CODE_MAP.md](CODE_MAP.md) maps each result to its simulation, analysis and
+figure inputs. [REPRODUCIBILITY.md](REPRODUCIBILITY.md) specifies the model,
+parameters, estimators, seeds, commands and remaining limitations.
+`SOURCE_MANIFEST.json` records file hashes and source provenance.
+[VALIDATION.md](VALIDATION.md) records the executed checks and their scope.
 
-## Reproduction Scope
+The numerical source files are preserved without changing the model, parameter
+grids or estimators. Portable entry points adapt file locations and output
+directories. Full trajectory tables are not bundled, and the complete
+production ensemble has not been rerun during repository validation.
 
-The code executes the documented simulations and analysis pipelines. A full
-stochastic rerun has not been performed as part of packaging. The distribution
-does not include all raw trajectories or claim a one-command, pixel-identical
-regeneration of every final manuscript panel. In particular, the exact final
-correlation-time panel's numerical provenance needs reconciliation; the
-available estimator variants are documented separately.
+## Publication Status
 
-No manuscript PDF, reviewer correspondence, cluster credentials, SSH keys, or
-subsequent-paper research is included. Do not put access tokens into this repository.
-
-## Citation and License
-
-The final article citation and a tagged release URL will be added before submission
-of the code-availability statement. No reuse license has been granted in this
-staging snapshot; the authors must approve the license before publication.
+This is a private, pre-publication repository. The article citation and reuse
+license have not yet been assigned. Manuscript drafts, reviewer correspondence
+and institutional access details are not part of this distribution.
