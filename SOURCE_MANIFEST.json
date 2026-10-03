@@ -33,8 +33,8 @@
     },
     {
       "file": "VALIDATION.md",
-      "sha256": "c29238c3430284e0e13fced09951e2e590403454eb422b040857bbb16c9677bf",
-      "bytes": 2256,
+      "sha256": "654ccdf1f379d9833ea6468c394e458497ffeff0c09bc60cf7410caa57bee41a",
+      "bytes": 2739,
       "origin": "Repository documentation, tests, or portable entry point"
     },
     {
@@ -144,15 +144,15 @@
     {
       "file": "figures/plot_figure3.py",
       "source_relative_path": "revision_reviewer1/figure3/plot_figure3.py",
-      "sha256": "681450232e6673032095b6407136cc8ca84a5c02b339934b92ff960c82e21bd7",
-      "bytes": 9238,
+      "sha256": "f90827c040956cc19b44e8b99df20eb6342f7213e3d711e945fece19a97bb247",
+      "bytes": 9231,
       "copied_without_modification": true
     },
     {
       "file": "figures/plot_figure4.py",
       "source_relative_path": "revision_reviewer1/figure4/plot_figure4.py",
-      "sha256": "b2a5dd898796d7b1ba18e3b44837ede7021a872fc62203c72a2299dd65ed1147",
-      "bytes": 7389,
+      "sha256": "b87b0d2c161f8ce40cc9436e61508a9757efb11d291a3ef8912f2a64cde4741e",
+      "bytes": 8585,
       "copied_without_modification": true
     },
     {
@@ -769,8 +769,8 @@
     },
     {
       "file": "tests/test_release.py",
-      "sha256": "0357e3562cac6389c37ec45d7045367a4053aee8a60187e9c0d2c2d9940c7326",
-      "bytes": 3109,
+      "sha256": "e6d5da6204a806474e3c5533a84319d94acf2707cf6ca577a2b89f4a286af7e5",
+      "bytes": 4148,
       "origin": "Repository documentation, tests, or portable entry point"
     },
     {

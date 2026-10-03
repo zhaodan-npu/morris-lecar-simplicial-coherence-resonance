@@ -6,7 +6,7 @@ These describe the validation environment, not every historical cluster run.
 
 | Check | Outcome |
 | --- | --- |
-| `python -m unittest discover -s tests -v` | 11 tests passed: model conventions, saved parameters, internal imports, network reconstruction and file integrity |
+| `python -m unittest discover -s tests -v` | 13 tests passed: model conventions, saved parameters, internal imports, network reconstruction, file integrity and optimum-guide selection |
 | `python reproduce.py smoke --output results/release_validation` | 32 trajectory records; reduced installation test only |
 | `python figures/render.py --figure all` | 40 numbered panels and 3 construction panels exported; data and layout assertions passed |
 | `python checks/run.py equivalence` | All 30 integer operators agree exactly; independent full-duration integrations retain identical detected spike steps for all 100 nodes in both cases; 4 diagnostic panels exported |
@@ -26,3 +26,10 @@ The `matched` and `peak` validations used that separate local archive.
 
 The manuscript-PDF extraction utilities are included for provenance but were
 not rerun in this repository validation. Their additional dependency is pypdf.
+
+Figure-annotation update: Figure 3(a,b) uses CV* and Dv* for the optimum
+annotations. Figure 4(a,b) has three color-matched vertical dotted lines per
+panel, marking the original eligible-grid optima. Existing open markers still
+identify incomplete CV samples; no new optimum-marker overlays are added.
+Independent PDF checks confirmed unchanged curve values and interval endpoints
+and verified all six new guide positions against the saved control results.
