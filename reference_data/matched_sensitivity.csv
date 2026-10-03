@@ -1,0 +1,7 @@
+alpha,label,rule,Dv_star,CV_star,n_retained,CV_at_primary_optimum,n_at_primary_optimum
+1.5,control,each retained path >=1000 total spikes; >=95% of paths retained at eligible grid point,0.56,0.5398305855029528,4320,0.5398305855029528,4320
+2.0,control,each retained path >=1000 total spikes; >=95% of paths retained at eligible grid point,1.0,0.6784424953396069,4320,0.6784424953396069,4320
+1.5,matched_pairwise,each retained path >=1000 total spikes; >=95% of paths retained at eligible grid point,0.12,0.1912607268448847,4320,0.1912607268448847,4320
+2.0,matched_pairwise,each retained path >=1000 total spikes; >=95% of paths retained at eligible grid point,0.16,0.12811742162149975,4290,0.12811742162149975,4290
+1.5,higher_order,each retained path >=1000 total spikes; >=95% of paths retained at eligible grid point,0.16,0.2831006443278282,4320,0.2831006443278282,4320
+2.0,higher_order,each retained path >=1000 total spikes; >=95% of paths retained at eligible grid point,0.3,0.2899837183694655,4320,0.2899837183694655,4320

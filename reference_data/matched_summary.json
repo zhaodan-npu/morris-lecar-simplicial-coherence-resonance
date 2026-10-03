@@ -1,0 +1,223 @@
+{
+  "parameters": {
+    "n_nodes": 100,
+    "n_networks": 30,
+    "n_trials_per_network": 12,
+    "p_edge": 0.15,
+    "p_fill_simplex": 0.5,
+    "sigma_1": 0.002,
+    "sigma_2": 0.12,
+    "capacitance": 20.0,
+    "g_ca": 4.4,
+    "g_k": 8.0,
+    "g_l": 2.0,
+    "v_ca": 120.0,
+    "v_k": -84.0,
+    "v_l": -60.0,
+    "v1": -1.2,
+    "v2": 18.0,
+    "v3": 2.0,
+    "v4": 30.0,
+    "phi": 0.04,
+    "current": 88.0,
+    "dt": 0.05,
+    "t_total": 15000.0,
+    "t_warmup": 3000.0,
+    "spike_threshold": 0.0,
+    "alphas": [
+      1.5,
+      2.0
+    ],
+    "beta": 0.0,
+    "noise_scales": [
+      0.04,
+      0.06,
+      0.09,
+      0.12,
+      0.16,
+      0.2,
+      0.25,
+      0.3,
+      0.4,
+      0.56,
+      0.75,
+      1.0,
+      1.25,
+      1.56,
+      1.89,
+      2.25,
+      3.06,
+      4.0,
+      6.25,
+      9.0
+    ],
+    "base_seed": 20299501
+  },
+  "n_raw_rows": 518400,
+  "bootstrap_replicates": 20000,
+  "bootstrap_seed": 20260929,
+  "bootstrap_unit": "paired network, same weights for conditions and noise points",
+  "estimator": "arithmetic mean of finite path-level pooled-within-node-ISI CVs; ratio of sums in network bootstrap",
+  "eligibility": "finite mean CV and mean total network spike count >=1000; reapplied within each bootstrap sample",
+  "minima_scope": "discrete 20-point noise grid, not continuous optima; pointwise curve intervals",
+  "mean_sigma1_matched": 0.06852769340896353,
+  "sigma1_matched_range": [
+    0.05313043478260869,
+    0.07975818639798488
+  ],
+  "max_matching_error": 1.1102230246251565e-16,
+  "weighted_pairwise_operator_max_error": 8.881784197001252e-16,
+  "best": [
+    {
+      "alpha": 1.5,
+      "label": "control",
+      "Dv_star": 0.56,
+      "CV_star": 0.5398305855029528,
+      "CV_star_ci_low": 0.539681687916519,
+      "CV_star_ci_high": 0.5399940610074296,
+      "mean_spike_count": 12337.22337962963,
+      "valid_cv_count": 4320,
+      "total_paths": 4320,
+      "paths_below_1000_spikes": 0
+    },
+    {
+      "alpha": 2.0,
+      "label": "control",
+      "Dv_star": 1.0,
+      "CV_star": 0.6784424953396069,
+      "CV_star_ci_low": 0.6782320203674232,
+      "CV_star_ci_high": 0.6786581165484422,
+      "mean_spike_count": 12606.196296296297,
+      "valid_cv_count": 4320,
+      "total_paths": 4320,
+      "paths_below_1000_spikes": 0
+    },
+    {
+      "alpha": 1.5,
+      "label": "matched_pairwise",
+      "Dv_star": 0.12,
+      "CV_star": 0.1912607268448847,
+      "CV_star_ci_low": 0.18850006008786563,
+      "CV_star_ci_high": 0.19428980002956003,
+      "mean_spike_count": 11887.554629629629,
+      "valid_cv_count": 4320,
+      "total_paths": 4320,
+      "paths_below_1000_spikes": 0
+    },
+    {
+      "alpha": 2.0,
+      "label": "matched_pairwise",
+      "Dv_star": 0.16,
+      "CV_star": 0.13499347308092696,
+      "CV_star_ci_low": 0.12448445032325879,
+      "CV_star_ci_high": 0.14286136580392322,
+      "mean_spike_count": 10983.618287037038,
+      "valid_cv_count": 4311,
+      "total_paths": 4320,
+      "paths_below_1000_spikes": 30
+    },
+    {
+      "alpha": 1.5,
+      "label": "higher_order",
+      "Dv_star": 0.16,
+      "CV_star": 0.2831006443278282,
+      "CV_star_ci_low": 0.2710906804363722,
+      "CV_star_ci_high": 0.29434096490967526,
+      "mean_spike_count": 11994.753935185185,
+      "valid_cv_count": 4320,
+      "total_paths": 4320,
+      "paths_below_1000_spikes": 0
+    },
+    {
+      "alpha": 2.0,
+      "label": "higher_order",
+      "Dv_star": 0.3,
+      "CV_star": 0.2899837183694655,
+      "CV_star_ci_low": 0.2754687244935344,
+      "CV_star_ci_high": 0.30480544577666435,
+      "mean_spike_count": 11605.805092592593,
+      "valid_cv_count": 4320,
+      "total_paths": 4320,
+      "paths_below_1000_spikes": 0
+    }
+  ],
+  "differences": [
+    {
+      "alpha": 1.5,
+      "contrast": "simplicial_minus_matched_optimal_CV",
+      "estimate": 0.09183991748294351,
+      "ci_low": 0.08122449684050022,
+      "ci_high": 0.1014738359218272
+    },
+    {
+      "alpha": 2.0,
+      "contrast": "simplicial_minus_matched_optimal_CV",
+      "estimate": 0.15499024528853855,
+      "ci_low": 0.14525529293710115,
+      "ci_high": 0.16578661129590183
+    }
+  ],
+  "sensitivity": [
+    {
+      "alpha": 1.5,
+      "label": "control",
+      "rule": "each retained path >=1000 total spikes; >=95% of paths retained at eligible grid point",
+      "Dv_star": 0.56,
+      "CV_star": 0.5398305855029528,
+      "n_retained": 4320,
+      "CV_at_primary_optimum": 0.5398305855029528,
+      "n_at_primary_optimum": 4320
+    },
+    {
+      "alpha": 2.0,
+      "label": "control",
+      "rule": "each retained path >=1000 total spikes; >=95% of paths retained at eligible grid point",
+      "Dv_star": 1.0,
+      "CV_star": 0.6784424953396069,
+      "n_retained": 4320,
+      "CV_at_primary_optimum": 0.6784424953396069,
+      "n_at_primary_optimum": 4320
+    },
+    {
+      "alpha": 1.5,
+      "label": "matched_pairwise",
+      "rule": "each retained path >=1000 total spikes; >=95% of paths retained at eligible grid point",
+      "Dv_star": 0.12,
+      "CV_star": 0.1912607268448847,
+      "n_retained": 4320,
+      "CV_at_primary_optimum": 0.1912607268448847,
+      "n_at_primary_optimum": 4320
+    },
+    {
+      "alpha": 2.0,
+      "label": "matched_pairwise",
+      "rule": "each retained path >=1000 total spikes; >=95% of paths retained at eligible grid point",
+      "Dv_star": 0.16,
+      "CV_star": 0.12811742162149975,
+      "n_retained": 4290,
+      "CV_at_primary_optimum": 0.12811742162149975,
+      "n_at_primary_optimum": 4290
+    },
+    {
+      "alpha": 1.5,
+      "label": "higher_order",
+      "rule": "each retained path >=1000 total spikes; >=95% of paths retained at eligible grid point",
+      "Dv_star": 0.16,
+      "CV_star": 0.2831006443278282,
+      "n_retained": 4320,
+      "CV_at_primary_optimum": 0.2831006443278282,
+      "n_at_primary_optimum": 4320
+    },
+    {
+      "alpha": 2.0,
+      "label": "higher_order",
+      "rule": "each retained path >=1000 total spikes; >=95% of paths retained at eligible grid point",
+      "Dv_star": 0.3,
+      "CV_star": 0.2899837183694655,
+      "n_retained": 4320,
+      "CV_at_primary_optimum": 0.2899837183694655,
+      "n_at_primary_optimum": 4320
+    }
+  ],
+  "new_simulations_run": false
+}

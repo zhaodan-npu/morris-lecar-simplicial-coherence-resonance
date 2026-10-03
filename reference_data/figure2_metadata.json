@@ -1,0 +1,88 @@
+{
+  "cases": [
+    {
+      "case": {
+        "letter": "a",
+        "alpha": 1.5,
+        "dv": 0.25
+      },
+      "scalars": {
+        "snapshot_index": 368,
+        "snapshot_time": 184.05000000000007,
+        "snapshot_score": 0.014441727370815298,
+        "snapshot_mean": -28.046226432093835,
+        "snapshot_std": 7.069593059198251,
+        "snapshot_q05": -36.19739099326698,
+        "snapshot_q95": -20.779391064140857,
+        "snapshot_active_fraction": 0.02,
+        "ensemble_cv": 0.29610463003945725,
+        "ensemble_spikes": 12708.550694444444
+      },
+      "cache_sha256": "3bda6fda05a56dc49f76253a9fe9290303f4352f58c9630d123a81a45f582100",
+      "summary_matches_original": true
+    },
+    {
+      "case": {
+        "letter": "b",
+        "alpha": 1.5,
+        "dv": 0.75
+      },
+      "scalars": {
+        "snapshot_index": 300,
+        "snapshot_time": 150.05000000000007,
+        "snapshot_score": 0.006289348719469805,
+        "snapshot_mean": -28.338703863660125,
+        "snapshot_std": 13.24769968438869,
+        "snapshot_q05": -42.86703683967313,
+        "snapshot_q95": 4.0112338230713105,
+        "snapshot_active_fraction": 0.06,
+        "ensemble_cv": 0.4502910522539105,
+        "ensemble_spikes": 15729.73912037037
+      },
+      "cache_sha256": "613e6663423760a108ef2c6ee38b7110f4f117aa9f262722b577a5c369713dc0",
+      "summary_matches_original": true
+    },
+    {
+      "case": {
+        "letter": "c",
+        "alpha": 2.0,
+        "dv": 0.25
+      },
+      "scalars": {
+        "snapshot_index": 901,
+        "snapshot_time": 450.55000000000007,
+        "snapshot_score": 0.011959583385437088,
+        "snapshot_mean": -27.15070186771712,
+        "snapshot_std": 6.03227441706949,
+        "snapshot_q05": -32.196420860182855,
+        "snapshot_q95": -23.691147481122485,
+        "snapshot_active_fraction": 0.01,
+        "ensemble_cv": 0.29461066552377657,
+        "ensemble_spikes": 11335.977777777778
+      },
+      "cache_sha256": "61c2c138c0e72d4aaf570fc07776ee75a90f754aa2b6cb8532da0ebb8fdf3040",
+      "summary_matches_original": true
+    },
+    {
+      "case": {
+        "letter": "d",
+        "alpha": 2.0,
+        "dv": 1.0
+      },
+      "scalars": {
+        "snapshot_index": 1154,
+        "snapshot_time": 577.0500000000001,
+        "snapshot_score": 0.01622382788988233,
+        "snapshot_mean": -28.021481309085424,
+        "snapshot_std": 6.064076072320435,
+        "snapshot_q05": -35.275933046613844,
+        "snapshot_q95": -20.259477317973232,
+        "snapshot_active_fraction": 0.01,
+        "ensemble_cv": 0.47161039705494134,
+        "ensemble_spikes": 15257.423611111111
+      },
+      "cache_sha256": "f2af61bdb00f7a1c6a8300096dc693b461f3b41be9eafea9575f22bba640b9fc",
+      "summary_matches_original": true
+    }
+  ]
+}
