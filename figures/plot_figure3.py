@@ -113,8 +113,8 @@ def draw(spec, rows):
     if metric == "isi_cv":
         for label, position in zip(COLORS, (.18, .59)):
             optimum = spec["optima"][label]
-            note = (rf"$\mathrm{{CV}}_{{\mathrm{{opt}}}}={optimum['cv']:.3f}"
-                    rf"\ (D_v={optimum['dv']:.2f})$")
+            note = (rf"$\mathrm{{CV}}^{{*}}={optimum['cv']:.3f}"
+                    rf"\ (D_v^{{*}}={optimum['dv']:.2f})$")
             optimum_notes.append(fig.text(position, .847, note, fontsize=15,
                                           color=COLORS[label], ha="left", va="center"))
     fig.canvas.draw()

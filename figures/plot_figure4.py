@@ -1,4 +1,4 @@
-"""Move Figure 4 legends outside the axes without changing estimates or masks."""
+"""Draw Figure 4 with external legends and noise-optimum guides."""
 
 import hashlib
 import json
@@ -51,10 +51,18 @@ def style():
     })
 
 
+def minimum_row(group):
+    candidates = [r for r in group if r["eligible_for_minimum"] and np.isfinite(r["CV_mean"])]
+    if not candidates:
+        raise ValueError("No eligible finite CV values for minimum selection")
+    return min(candidates, key=lambda r: r["CV_mean"])
+
+
 def draw(panel, alpha, rows):
     fig, ax = plt.subplots(figsize=(5.6, 4.2))
     fig.subplots_adjust(left=.18, right=.97, bottom=.18, top=.75)
     handles, plotted, incomplete = [], [], []
+    optima = []
     for label in LABELS:
         group = sorted((r for r in rows if r["alpha"] == alpha and r["label"] == label),
                        key=lambda r: r["Dv"])
@@ -72,6 +80,11 @@ def draw(panel, alpha, rows):
                     mfc=fill, mec=color, mew=1.2, zorder=4)
         lo = np.array([r["CV_ci_low"] for r in group])
         hi = np.array([r["CV_ci_high"] for r in group])
+        best = minimum_row(group)
+        guide = ax.axvline(best["Dv"], color=color, linestyle=":", linewidth=1.2,
+                           alpha=.75, zorder=1)
+        np.testing.assert_array_equal(guide.get_xdata(), [best["Dv"], best["Dv"]])
+        optima.append({"label": label, "Dv_star": best["Dv"], "CV_star": best["CV_mean"]})
         bars = ax.vlines(x[eligible], lo[eligible], hi[eligible], color=color, lw=1.1, zorder=3)
         segments = np.array(bars.get_segments())
         np.testing.assert_array_equal(segments[:, 0, 1], lo[eligible])
@@ -121,7 +134,9 @@ def draw(panel, alpha, rows):
     return {"panel": panel, "alpha": alpha, "pdf_sha256": sha(HERE / f"fig4{panel}.pdf"),
             "legend_outside_axes": True, "condition_outside_axes": True,
             "no_clipped_text": True, "no_tick_overlap": True, "panel_letters": False,
-            "plotted": plotted, "incomplete": incomplete, "text_boxes": boxes}
+            "plotted": plotted, "incomplete": incomplete, "text_boxes": boxes,
+            "optima": optima, "optimum_guides": "color-matched vertical dotted lines",
+            "optimum_marker_overlays": False}
 
 
 def main():
@@ -133,6 +148,12 @@ def main():
     assert [(r["Dv"], r["valid_cv_count"]) for r in panels[1]["incomplete"]] == [
         (.09, 2143), (.12, 4047), (.16, 4311)]
     assert not panels[0]["incomplete"]
+    saved = json.loads((ORIGINAL / "analysis" / "summary.json").read_text())["best"]
+    for panel in panels:
+        for best in panel["optima"]:
+            expected = next(r for r in saved if r["alpha"] == panel["alpha"] and r["label"] == best["label"])
+            np.testing.assert_allclose([best["Dv_star"], best["CV_star"]],
+                                       [expected["Dv_star"], expected["CV_star"]], rtol=0, atol=1e-12)
     assert before == inputs()
     (HERE / "analysis").mkdir(exist_ok=True)
     (HERE / "analysis" / "layout_verification.json").write_text(json.dumps(
@@ -140,7 +161,7 @@ def main():
          "source_data_unchanged": True, "error_bars_recomputed": False,
          "legend_labels": DISPLAY, "activity_rule": "Original mean total network spikes >= 1000"},
         indent=2), encoding="utf-8")
-    print("Exported fig4a and fig4b with external legends; 110 means and confidence intervals unchanged.")
+    print("Exported fig4a and fig4b with six checked optimum guides; 110 means and confidence intervals unchanged.")
 
 
 if __name__ == "__main__":
