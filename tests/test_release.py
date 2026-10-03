@@ -58,6 +58,25 @@ class ReleaseTests(unittest.TestCase):
             self.assertAlmostEqual(float(row["isi_cv_mean"]), record["scalars"]["ensemble_cv"])
             self.assertAlmostEqual(float(row["spike_count_total_mean"]), record["scalars"]["ensemble_spikes"])
 
+    def test_figure4_optima_match_saved_results(self):
+        from plot_figure4 import minimum_row
+        rows = render.read_table("matched_curves.csv")
+        expected = json.loads((ROOT / "reference_data" / "matched_summary.json").read_text())["best"]
+        for record in expected:
+            group = [r for r in rows if r["alpha"] == record["alpha"] and r["label"] == record["label"]]
+            best = minimum_row(group)
+            self.assertEqual(best["Dv"], record["Dv_star"])
+            self.assertAlmostEqual(best["CV_mean"], record["CV_star"], places=12)
+
+    def test_figure4_minimum_excludes_ineligible_and_nonfinite_values(self):
+        from plot_figure4 import minimum_row
+        good = {"eligible_for_minimum": True, "CV_mean": .3}
+        invalid = [{"eligible_for_minimum": False, "CV_mean": .01},
+                   {"eligible_for_minimum": True, "CV_mean": float("nan")}]
+        self.assertIs(minimum_row(invalid + [good]), good)
+        with self.assertRaises(ValueError):
+            minimum_row(invalid)
+
 
 if __name__ == "__main__":
     unittest.main()
