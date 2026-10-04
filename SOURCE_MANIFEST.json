@@ -15,26 +15,26 @@
     },
     {
       "file": "CODE_MAP.md",
-      "sha256": "a7b1ac4726cb74ab0565872cdd71b2b7a83d41eb2f55dc707d88f03542358c38",
-      "bytes": 7506,
+      "sha256": "4ce98f787caf00f008b7c2a17040e5c8599754340e70a60f0c4dedad47778d98",
+      "bytes": 7914,
       "origin": "Repository documentation, tests, or portable entry point"
     },
     {
       "file": "README.md",
-      "sha256": "e9c63d412e5b4413f987ce4a130bf772b3c53a379ced7477770cadc2f69f4506",
-      "bytes": 6556,
+      "sha256": "8e31dc69c216001620bd234d550cbc58dd463a953c13c2799c410aacb7092cfe",
+      "bytes": 7277,
       "origin": "Repository documentation, tests, or portable entry point"
     },
     {
       "file": "REPRODUCIBILITY.md",
-      "sha256": "d8e04103b3fe46086bab5b3cc763bd93dba869df86990586e36e277fa165c62d",
-      "bytes": 10032,
+      "sha256": "5181d5df344da44068ed5ba62c369ff766b6a5af6917d9925bc01f72e5623566",
+      "bytes": 15555,
       "origin": "Repository documentation, tests, or portable entry point"
     },
     {
       "file": "VALIDATION.md",
-      "sha256": "608319ea9f59b951469f021d34dc663a8f9a664e8f549336cc640702d61ebd3b",
-      "bytes": 3598,
+      "sha256": "3916b0360ac03d3db92f8ca38331f2cef6242c0c11c74831bb4e9cd451ca9642",
+      "bytes": 6099,
       "origin": "Repository documentation, tests, or portable entry point"
     },
     {
@@ -82,8 +82,15 @@
     {
       "file": "checks/prepare_figure3.py",
       "source_relative_path": "revision_reviewer1/figure3/prepare_and_verify.py",
-      "sha256": "61474cfa1f404e6b8b6f37debe1af2c685893829e5e642ce02e16a2395c278e4",
-      "bytes": 10842,
+      "sha256": "164dca39304a4ea7ba62ef38d29ba0be5e2acf20b73981318e0eb04c6295895a",
+      "bytes": 11297,
+      "copied_without_modification": true
+    },
+    {
+      "file": "checks/prepare_figure3_numerical.py",
+      "source_relative_path": "revision_reviewer1/figure3/prepare_numerical_inputs.py",
+      "sha256": "195cad8df0a939792e47ab7ccbb594aa01e85ab0578f4390b4127e657ee1c020",
+      "bytes": 5863,
       "copied_without_modification": true
     },
     {
@@ -95,8 +102,8 @@
     },
     {
       "file": "checks/run.py",
-      "sha256": "46230968a828c8798209b3d4da21818a7cedc7e9a6b025bcb594f11321f59543",
-      "bytes": 3708,
+      "sha256": "c4a1ce023c307d1ffa0559a646888591deabdd073c5261bbc41e1d50f2a621fd",
+      "bytes": 5119,
       "origin": "Repository documentation, tests, or portable entry point"
     },
     {
@@ -199,8 +206,8 @@
     },
     {
       "file": "figures/render.py",
-      "sha256": "0047f77b45b202f2c8dea3be24c2e440b780d0b0c9a3b4d9448932b4a2f21af0",
-      "bytes": 4335,
+      "sha256": "6eaa631d99e900576273c8a5a79fd657876e52c75ee7a189dc20f506f8a7c8d9",
+      "bytes": 4410,
       "origin": "Repository documentation, tests, or portable entry point"
     },
     {
@@ -330,6 +337,31 @@
       "copied_without_modification": true
     },
     {
+      "file": "parameters/correlation_time.json",
+      "sha256": "6b81b38499fd61532807959a1e10c3a9ef0744a2e8feee2585bc85e99d2be1f9",
+      "bytes": 1393,
+      "copied_without_modification": false,
+      "transformation": "Protocol assembled from the original long-record solver and submission settings",
+      "sources": [
+        {
+          "path": "morris_lecar_voltage_coherence_true.py",
+          "sha256": "7d680015bc43050281d6159f8c19adf7476ff710bf357d11f4f7fa41e5928097"
+        },
+        {
+          "path": "run_morris_lecar_true_tcor.sh",
+          "sha256": "21c0f8f7eafee21f837db88c69f2e20fade9511fdacff515202e1840891779b6"
+        },
+        {
+          "path": "aggregate_true_correlation_time.py",
+          "sha256": "4b88d1b7b7f1985aef12c7a165edc0ed827624803d53cbf5b20786a9ac5054bd"
+        },
+        {
+          "path": "analyze_true_correlation_time_debiased.py",
+          "sha256": "4240f03995ed2d804cf8b2608c1f54c26974c8559028db2fb7cbb4876687d48e"
+        }
+      ]
+    },
+    {
       "file": "parameters/main.json",
       "source_relative_path": "paper_suite_true_simplicial_array_prl_N100_Dv_refined/candidate39_main/chunks/network_000/parameters.json",
       "sha256": "aa62e049c22bee203c2e0671440889af996c99ea83eeab27b346bf288c05f2f4",
@@ -428,6 +460,27 @@
       "copied_without_modification": true
     },
     {
+      "file": "reference_data/correlation_recovery_audit.json",
+      "source_relative_path": "correlation_time_true_20260804_recovered/recovery_audit.json",
+      "sha256": "4c641b372f77fdb4f6b8d3d4ad26eca91e36570e17e72d18ec05cf9bbe091cff",
+      "bytes": 5803,
+      "copied_without_modification": true
+    },
+    {
+      "file": "reference_data/correlation_time_debiased.csv",
+      "source_relative_path": "correlation_time_true_20260804_recovered/debiased/true_correlation_time_debiased.csv",
+      "sha256": "0cfb10ab00b66604b20e7d7dedc7a68e1911707799b71a04525741efe8cdfe74",
+      "bytes": 60033,
+      "copied_without_modification": true
+    },
+    {
+      "file": "reference_data/correlation_time_raw_summary.csv",
+      "source_relative_path": "correlation_time_true_20260804_recovered/summary/true_correlation_time_summary.csv",
+      "sha256": "7910a2056f7bac8d72168993d2c61542545e90bbdf97e3697f8bd56bc95bee3e",
+      "bytes": 19297,
+      "copied_without_modification": true
+    },
+    {
       "file": "reference_data/figure2_a.npz",
       "source_relative_path": "revision_reviewer1/figure2/analysis/data_a.npz",
       "sha256": "3bda6fda05a56dc49f76253a9fe9290303f4352f58c9630d123a81a45f582100",
@@ -471,20 +524,20 @@
     {
       "file": "reference_data/figure3.csv",
       "source_relative_path": "revision_reviewer1/figure3/analysis/plot_data.csv",
-      "sha256": "b8f79b8d0e5de9d63771617bfee66972550090b412e8d483dea087a6a94d4b29",
-      "bytes": 40190,
+      "sha256": "422ac29a60d77ea6cce5af0b32c515118358c4515734b4993f058bd79a627f48",
+      "bytes": 41163,
       "copied_without_modification": true
     },
     {
       "file": "reference_data/figure3_metadata.json",
-      "sha256": "5744bbdc49988f715ad5c9d100979439a852082d5d0bca7fd310981e4e356461",
-      "bytes": 3715,
+      "sha256": "8aeae81a8857e1afa9c647bab7a52aca0a42fd20d979973cf86e8be1ac4c9f59",
+      "bytes": 2919,
       "copied_without_modification": false,
       "transformation": "Selected metadata / concatenated network records; numerical values unchanged",
       "sources": [
         {
           "path": "revision_reviewer1/figure3/analysis/manifest.json",
-          "sha256": "5744bbdc49988f715ad5c9d100979439a852082d5d0bca7fd310981e4e356461"
+          "sha256": "8aeae81a8857e1afa9c647bab7a52aca0a42fd20d979973cf86e8be1ac4c9f59"
         }
       ]
     },
@@ -756,9 +809,21 @@
       "origin": "Repository documentation, tests, or portable entry point"
     },
     {
+      "file": "slurm/run_correlation.sh",
+      "sha256": "1f56a1af0a6301cc72cfa8c5234c7b47efc94f592578246d6f289d6d9f3a319a",
+      "bytes": 1807,
+      "origin": "Repository documentation, tests, or portable entry point"
+    },
+    {
       "file": "slurm/run_main.sh",
       "sha256": "13ce16f5454798890578a53ae2d2cbca8a2cffc0cf3fb3b07d0bc62f8bf9e381",
       "bytes": 653,
+      "origin": "Repository documentation, tests, or portable entry point"
+    },
+    {
+      "file": "tests/test_correlation.py",
+      "sha256": "c5515f757b22bae14822b763db42c82edfe198fd28c4deb4175990bd7c682392",
+      "bytes": 4077,
       "origin": "Repository documentation, tests, or portable entry point"
     },
     {
@@ -769,8 +834,8 @@
     },
     {
       "file": "tests/test_release.py",
-      "sha256": "e6d5da6204a806474e3c5533a84319d94acf2707cf6ca577a2b89f4a286af7e5",
-      "bytes": 4148,
+      "sha256": "a3636a8ad43edf95f85e0e01c9430348438fe7fc6b658e4c66fd484d7cfaf86e",
+      "bytes": 4216,
       "origin": "Repository documentation, tests, or portable entry point"
     },
     {

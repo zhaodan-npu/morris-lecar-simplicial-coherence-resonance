@@ -78,6 +78,7 @@ substitute for the production calculation.
 | Strength-matched pairwise control | `morris_lecar_simplicial_matched_coupling_array.py` |
 | Activation/excursion durations, variance contributions and spike correlations | `morris_lecar_simplicial_mechanism_supplement_array.py` |
 | Smaller-time-step calculation | `morris_lecar_simplicial_dt_convergence_array.py` |
+| Long-record voltage correlation time | `morris_lecar_voltage_coherence_true.py`, `aggregate_true_correlation_time.py`, `analyze_true_correlation_time_debiased.py` |
 | Deterministic working point | `morris_lecar_hopf_distance_analysis.py` |
 
 [REPRODUCIBILITY.md](REPRODUCIBILITY.md#full-experiment-commands) gives
@@ -85,6 +86,13 @@ the task ranges, commands and aggregation steps. `slurm/run_main.sh` is a
 submission template; cluster account and partition settings are supplied by
 the user. `python checks/run.py equivalence` independently compares the
 triangle-sum and weighted-edge implementations.
+
+The correlation-time calculation uses 120000 ms trajectories and the same
+3000 ms transient. Its full sampling and postprocessing protocol is recorded
+in `parameters/correlation_time.json` and
+[REPRODUCIBILITY.md](REPRODUCIBILITY.md#voltage-correlation-time).
+`slurm/run_correlation.sh` runs the full-duration calculation; it is not the
+short-record default of the historical solver's command-line interface.
 
 ## Repository Structure
 
@@ -113,10 +121,12 @@ each figure's data source. Publication plotting uses Times New Roman.
 
 The numerical source files retain the original model, parameter grids and
 estimators. Full trajectory tables are not bundled, and the complete production
-ensemble has not been rerun during repository validation. The source-data and
-estimator mapping for the archived correlation-time panels, Fig. 3(e,f), still
-requires verification; those panels are not claimed as verified numerical
-reproduction. Details are recorded in REPRODUCIBILITY.md.
+ensemble has not been rerun during repository validation. All six Figure 3
+panels now use numerical output tables, including the long-record,
+noise-floor-corrected correlation times and network-jackknife errors for
+panels (e,f). The correspondence with the archived results is checked in tests.
+The full network-level autocorrelation archive is not bundled; its regeneration
+and analysis commands are provided in REPRODUCIBILITY.md.
 
 ## Publication Status
 

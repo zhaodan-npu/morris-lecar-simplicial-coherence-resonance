@@ -159,19 +159,19 @@ Current figure numbering is used below; older script names may differ.
 | --- | --- |
 | 2 | `plot_figure1_dynamics_revised.py`, `plot_alpha_noise_cv_panel_like_reference.py`; short illustrations are separate from production statistics |
 | 3(a-d) | main production driver; `reference_data/main_cv.csv` |
-| 3(e-f) | voltage-correlation estimator variants; recovered coordinates in `figure3.csv`, matching raw output not identified |
+| 3(e-f) | long-record solver and floor-corrected ACF analysis; `correlation_time_debiased.csv` supplies the mean and network-jackknife error |
 | 4 | matched-coupling driver; `checks/analyze_comment2.py`; `matched_*.csv` summaries |
 | 5 | sigma2 jobs; `reference_data/optimal_sigma2.csv` |
 | 6 | phase driver; `reference_data/phase_diagram.npz` |
 | 7--8 | supplement driver; `optimal_structure.csv`, `optimal_alpha.csv` |
 | 9--11 | mechanism driver; `activation_excursion.csv`, `variance_fractions.csv`, `spike_correlations.csv` |
 
-The two voltage-correlation modules and the debiasing analysis implement distinct
-estimators. Figure 3(e,f) was recovered from PDF vector paths because an exact
-matching source table had not been found. Those coordinates are bundled solely
-for redrawing, with the provenance flag in `figure3_metadata.json` and a warning
-from the renderer. They are not raw simulation output. The original extraction
-procedure is retained in `checks/prepare_figure3.py`.
+Figure 3(e,f) uses the long-record calculation detailed below. The historical
+short-record analyses are not interchangeable with this calculation. All six
+panels in `figure3.csv` are now prepared from numerical tables by
+`checks/prepare_figure3_numerical.py`; the input source and error definition are
+stored for every row. The historical graphics-audit utilities are not required
+to generate these numerical inputs.
 
 See CODE_MAP.md for the complete result-to-code map and required archive inputs.
 The portable equivalence check uses the saved parameters and metadata for all
@@ -179,6 +179,118 @@ The portable equivalence check uses the saved parameters and metadata for all
 the original 1e-6 voltage-error warning; algebraic equivalence is not inferred
 from a floating-point tolerance. The low-activity checks do not establish
 timestep convergence or prove that the entire low-noise peak is an artifact.
+
+## Voltage Correlation Time
+
+The source mapping for Figure 3(e,f) was resolved on 2026-10-04 by retrieving the
+long-record production archive. The solver, analysis modules and model
+dependencies match the archived cluster copies byte for byte. The 80 numerical
+means and their error-bar endpoints agree with the archived figure to less
+than 1e-8 s. `reference_data/correlation_recovery_audit.json` records this check.
+
+### Simulation and Sampling
+
+Use `morris_lecar_voltage_coherence_true.py`, with the main model parameters and
+the following explicit overrides. The solver's historical CLI defaults are
+shorter than the production protocol; do not omit the duration and lag flags.
+
+| Quantity | Correlation-time production value |
+| --- | --- |
+| T; transient | 120000 ms; 3000 ms |
+| Integration dt; recorded sample spacing | 0.05 ms; 0.5 ms (stride 10) |
+| Maximum lag | 50000 ms |
+| Networks; trial batches; paths per batch | 30; 12; 12 |
+| Sampled node indices (zero-based) | 0, 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, 99 |
+| Noise grid and alpha | Same 20 D_v values and alpha={1.5,2.0} as the main run |
+| Stored network-level records | 2 alphas x 20 noise values x 2 couplings x 30 networks = 2400 NPZ files |
+
+The sampled node voltages, not just the population mean, define the plotted
+correlation time. The population-mean-voltage ACF is saved as a separate
+diagnostic. Network and paired trial seeds use the same namespaces as the
+production CV calculation. Full model and measurement settings are recorded
+in `parameters/correlation_time.json`.
+
+### Estimator and Error Bars
+
+For each retained node-voltage record, subtract its temporal mean. Compute the
+lag-dependent covariance using the divisor L-k, where L is the record length
+and k the lag in samples, then normalize by the zero-lag covariance. The FFT
+implementation is tested against this direct calculation. Records with
+zero-lag variance at most 1e-14 are excluded by the original routine.
+
+Normalized ACFs are averaged within each trial batch, then over its 12 batches
+to form the network ACF r_j(tau). Across the M=30 networks compute the mean
+r_bar(tau) and its sample standard error s_r(tau). The plotted estimator is
+
+```text
+t_cor = integral from 0 to 50000 ms of
+        max(abs(r_bar(tau)) - sqrt(2/pi)*s_r(tau), 0) d tau.
+```
+
+The integration uses the trapezoidal rule on the 0.5 ms lag grid. For every
+leave-one-network-out sample, both the mean ACF and its standard error are
+recomputed, and the same floor correction and integration are repeated.
+For the resulting estimates t_(-j), the jackknife standard error is
+`sqrt((M-1)/M * sum((t_(-j)-mean(t_(-j)))**2))`.
+
+The numerical table columns are `floor_db_50000_ms` for the central estimate
+and `floor_db_jackknife_se_ms` for its standard error. Divide both by 1000 for
+the displayed seconds; the endpoints are mean +/- one jackknife SE, not 95%
+confidence intervals. `raw_unbiased_50000_ms`, the per-network absolute ACF
+integrals and the older short-record means are different estimators.
+
+Increasing the cutoff from 40 to 50 s changes this corrected estimator by at
+most 2.4336% over the 80 conditions. This checks the two finite cutoffs; it
+does not establish convergence of an infinite-lag integral.
+
+### Commands
+
+One full-duration batch for one condition:
+
+```sh
+python morris_lecar_voltage_coherence_true.py condition --output-dir results/correlation/batches/example --alpha 1.5 --network-index 0 --dv-index 0 --trial-index 0 --label-index 0 --n-paths 12 --sampled-nodes 12 --trace-stride 10 --max-lag-ms 50000 --t-total 120000 --t-warmup 3000
+```
+
+Each network/noise cell requires trial indices 0--11 and label indices 0--1.
+After all 24 batch files for that cell exist, combine them:
+
+```sh
+python morris_lecar_voltage_coherence_true.py combine --input-dir results/correlation/batches/example --output-dir results/correlation/results --alpha 1.5 --network-index 0 --dv-index 0 --n-trial-batches 12 --n-paths 12
+```
+
+For the full production calculation, submit the supplied array template once
+per alpha, with your cluster's allocation, partition and QoS options. Each
+array contains all 600 network/noise cells and computes both couplings:
+
+```sh
+mkdir -p logs
+sbatch --export=ALL,ALPHA=1.5 slurm/run_correlation.sh
+sbatch --export=ALL,ALPHA=2.0 slurm/run_correlation.sh
+```
+
+The template preserves the batch outputs for inspection and uses the full
+original parameter grid and ensemble. Resource requests are templates for the
+target site; no institutional account or access details are embedded.
+After both arrays have finished, validate all 2400 combined records, aggregate,
+correct the finite-sample floor, compute errors and draw panels (e,f):
+
+```sh
+python checks/run.py correlation --archive results/correlation/results --output results/correlation_analysis
+```
+
+The two statistical stages can also be run separately:
+
+```sh
+python aggregate_true_correlation_time.py results/correlation/results results/correlation_summary
+python analyze_true_correlation_time_debiased.py results/correlation/results results/correlation_debiased
+```
+
+The combined command uses `reference_data/main_cv.csv` only to locate the
+CV-optimal guide lines. Supply `--main-csv` with your freshly merged main-run
+CSV to use your own CV results. Neither analysis derives the correlation time
+from those CV values. It is calculated from the supplied network ACF arrays.
+The full ACF archive and continuous voltage trajectories are not included in
+this compact repository; the above solver generates the ACF archive anew.
 
 ## Packaging Validation
 

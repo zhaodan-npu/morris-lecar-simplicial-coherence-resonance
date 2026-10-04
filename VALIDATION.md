@@ -19,9 +19,10 @@ accumulated voltage difference is approximately 6.052e-6 mV, above the original
 1e-6 diagnostic threshold. The non-Gaussian case gives approximately 3.933e-9
 mV. This is not a claim of bitwise voltage equality or timestep convergence.
 
-Figure 3(e,f) was redrawn from recovered PDF coordinates. Its matching raw
-correlation-time table remains unresolved. The full production ensembles were
-not rerun, and the complete trajectory archive is not distributed here.
+Before 2026-10-04, Figure 3(e,f) was redrawn from recovered figure coordinates
+because its source table had not been located. This was resolved by the
+long-record archive recovery described below. The full production ensembles
+were not rerun, and the complete trajectory archive is not distributed here.
 The `matched` and `peak` validations used that separate local archive.
 
 The manuscript-PDF extraction utilities are included for provenance but were
@@ -48,3 +49,43 @@ the equations without bundled comparison data. It is a reduced installation
 test, not a repeat of the production ensemble, a convergence test, or a
 resolution of the correlation-time source mapping described above. The
 production source modules and parameter grids were not changed.
+
+## Correlation-Time Source Recovery (2026-10-04)
+
+The long-record production archive was found on the cluster and retrieved.
+Its 2400 combined network-level ACF files cover exactly 80 conditions and
+30 networks per condition. The original aggregation validates all records'
+model parameters, durations and lag grids. An additional audit checks the
+12 sampled node indices, all paired trial seeds and the topology counts
+against the original network construction. Six numerical source files,
+including the model dependencies, match the cluster copies byte for byte.
+
+Both statistical stages were rerun locally over the complete ACF archive:
+
+- The uncorrected summary CSV is byte-identical to the archived version.
+- All corrected integral values and both jackknife-error columns are identical
+  to the archived values. Only unused envelope-fit diagnostics differ at
+  floating-point precision; the complete diagnostic CSV is not byte-identical.
+- The 80 corrected means and all error-bar endpoints match the archived
+  Figure 3(e,f) to less than 1e-8 s. The residual is graphic-coordinate precision,
+  not a difference between numerical estimators.
+
+The active Figure 3 inputs now come exclusively from numerical CSV tables.
+Its old coordinate-derived input is no longer used by the repository renderer.
+`correlation_recovery_audit.json` records hashes, field-level differences,
+sampling checks and the resolved source mapping. The full 4.15 GB ACF archive
+is retained locally, not uploaded to the compact repository.
+
+The original SDE ensemble was not reintegrated during this recovery. The
+SLURM template and commands reproduce its full duration, sampling and parameter
+grid; the plotting source replacement does not change the reported results.
+
+The updated suite passes all 19 tests. The repository command
+`python checks/run.py correlation --archive /path/to/network_acfs` was also
+run end to end over all 2400 files: both statistical stages completed, all
+240 generated Figure 3 input rows equal the shipped numerical rows, and the
+two correlation panels were exported successfully. `figures/render.py --figure 3`
+exports all six panels with the new numerical inputs. The source figure's six
+PDFs pass the vector-value, embedded-font and optimum-guide checks; the changed
+panels (e,f) were rendered and visually inspected. The SLURM template passes
+`bash -n`; no new cluster job was submitted during this recovery.
