@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 import shutil
+import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -67,20 +68,45 @@ def archive_analysis(kind, archive, output):
         counts.main()
 
 
+def correlation_analysis(archive, output, main_csv):
+    for script, subdir in (("aggregate_true_correlation_time.py", "summary"),
+                           ("analyze_true_correlation_time_debiased.py", "debiased")):
+        subprocess.run([sys.executable, str(ROOT / script), str(archive),
+                        str(output / subdir)], check=True)
+    from prepare_figure3_numerical import build_rows, prepare, read_rows
+    correlation_csv = output / "debiased" / "true_correlation_time_debiased.csv"
+    # Keep numerical inputs together so the provenance remains relative and portable.
+    local_main = output / "main_cv.csv"
+    shutil.copy2(main_csv, local_main)
+    prepare(local_main, correlation_csv, output / "figure3_inputs", output)
+    rows, panels = build_rows(read_rows(local_main), read_rows(correlation_csv))
+    import plot_figure3 as plot
+    plot.HERE = output / "figures"
+    plot.HERE.mkdir()
+    plot.apply_style()
+    for spec in panels:
+        if spec["metric"] == "tcor":
+            plot.draw(spec, rows)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("check", choices=("equivalence", "matched", "peak"))
+    parser.add_argument("check", choices=("equivalence", "matched", "peak", "correlation"))
     parser.add_argument("--archive", type=Path, help="Production archive with the directory names listed in CODE_MAP.md.")
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--main-csv", type=Path, default=ROOT / "reference_data" / "main_cv.csv",
+                        help="Main CV summary used to locate the CV-optimal guide lines for correlation panels.")
     args = parser.parse_args()
     if args.check != "equivalence" and args.archive is None:
-        parser.error("This analysis requires --archive; full trajectory tables are not bundled.")
+        parser.error("This analysis requires --archive; full trajectory/ACF archives are not bundled.")
     output = (args.output or ROOT / "results" / args.check).resolve()
     if output.exists():
         parser.error("Output already exists; select a new --output directory.")
     output.mkdir(parents=True)
     if args.check == "equivalence":
         equivalence(output)
+    elif args.check == "correlation":
+        correlation_analysis(args.archive.resolve(), output, args.main_csv.resolve())
     else:
         archive_analysis(args.check, args.archive.resolve(), output)
 

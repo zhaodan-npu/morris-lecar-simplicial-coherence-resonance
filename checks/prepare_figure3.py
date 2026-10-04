@@ -1,4 +1,8 @@
-"""Read the manuscript's vector curves; cross-check CSV data and final PDFs."""
+"""Prepare numerical figure inputs and verify the exported vector graphics.
+
+The legacy extractor is retained only as a record of the earlier figure audit.
+The default preparation now uses the recovered numerical correlation table.
+"""
 
 import argparse
 import csv
@@ -116,7 +120,7 @@ def verify_axis_labels(form):
     return labels
 
 
-def prepare():
+def legacy_prepare():
     (HERE / "analysis").mkdir(parents=True, exist_ok=True)
     reader = PdfReader(SOURCE)
     forms = reader.pages[8]["/Resources"]["/XObject"]
@@ -179,7 +183,8 @@ def prepare():
 
 def verify():
     manifest = json.loads((HERE / "analysis" / "manifest.json").read_text())
-    assert manifest["inputs"] == input_hashes()
+    for record in manifest["inputs"]:
+        assert sha(ROOT / record["path"]) == record["sha256"]
     with (HERE / "analysis" / "plot_data.csv").open(newline="", encoding="utf-8") as handle:
         data = list(csv.DictReader(handle))
     results = []
@@ -223,4 +228,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("mode", choices=("prepare", "verify"))
     args = parser.parse_args()
-    prepare() if args.mode == "prepare" else verify()
+    if args.mode == "prepare":
+        from prepare_numerical_inputs import prepare
+        correlation = ROOT / "correlation_time_true_20260804_recovered" / "debiased" / "true_correlation_time_debiased.csv"
+        prepare(CSV, correlation, HERE / "analysis", ROOT)
+    else:
+        verify()
