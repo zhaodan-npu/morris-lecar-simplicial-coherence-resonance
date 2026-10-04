@@ -35,7 +35,9 @@ class ReleaseTests(unittest.TestCase):
             self.assertEqual(data["dv"].size, 20)
         metadata = json.loads((ROOT / "reference_data" / "figure2_metadata.json").read_text())
         self.assertEqual(len(metadata["cases"]), 4)
-        self.assertTrue(json.loads((ROOT / "reference_data" / "figure3_metadata.json").read_text())["tcor_csv_not_available"])
+        f3 = json.loads((ROOT / "reference_data" / "figure3_metadata.json").read_text())
+        self.assertFalse(f3["tcor_csv_not_available"])
+        self.assertTrue(f3["numerical_data_only"])
 
     def test_network_metadata(self):
         import morris_lecar_paired_alpha_compare_simplicial as base
