@@ -4,6 +4,28 @@ Figure numbers refer to the revised manuscript. Use `figures/render.py` for the
 current presentation. The original numerical modules remain at the repository
 root so that their imports and command-line interfaces are unchanged.
 
+## From Equations to Statistics
+
+`reproduce.py run-network` selects the saved production parameter set and calls
+`run_one_network` in `morris_lecar_simplicial_paper_array_chunked.py`.
+That routine constructs a random simplicial network with
+`build_simplicial_network`, then calls `simulate_batch` for each alpha,
+noise intensity, trial batch and coupling condition. Both functions are in
+`morris_lecar_paired_alpha_compare_simplicial.py`.
+
+`simulate_batch` evaluates the ionic currents and gating dynamics at each time
+step, adds newly sampled alpha-stable increments, detects upward threshold
+crossings after the transient, and computes trajectory-level ISI CV and spike
+counts. `aggregate_rows` in `morris_lecar_simplicial_paper_suite.py` computes
+ensemble statistics. `merge_experiment` writes the combined numerical tables
+and noise-grid optimum summaries. These calculations do not read
+`reference_data/`, plot coordinates, or manuscript files.
+
+The simulation and analysis columns below identify numerical routines, whereas
+the renderer and bundled-input columns describe a separate plotting stage.
+In particular, the unresolved source mapping for Fig. 3(e,f) is not evidence
+that the simulation drivers depend on digitized curves.
+
 ## Paper Figures
 
 | Result | Simulation / analysis | Revised renderer | Bundled inputs in `reference_data/` |

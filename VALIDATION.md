@@ -33,3 +33,18 @@ panel, marking the original eligible-grid optima. Existing open markers still
 identify incomplete CV samples; no new optimum-marker overlays are added.
 Independent PDF checks confirmed unchanged curve values and interval endpoints
 and verified all six new guide positions against the saved control results.
+
+## Source-Only Simulation Check (2026-10-04)
+
+All 14 unit tests passed after adding `test_simulation_without_reference_inputs`.
+This test copies only the numerical modules and command-line entry point into
+an isolated temporary directory. No reference tables, figure inputs or
+manuscript files are copied. A subprocess runs `python reproduce.py smoke`,
+integrates the stochastic equations, and writes 32 trajectory records and an
+aggregated statistics table. Both coupling conditions are present.
+
+This establishes that the main simulation path can calculate new output from
+the equations without bundled comparison data. It is a reduced installation
+test, not a repeat of the production ensemble, a convergence test, or a
+resolution of the correlation-time source mapping described above. The
+production source modules and parameter grids were not changed.
