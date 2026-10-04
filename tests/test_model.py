@@ -1,6 +1,11 @@
 import hashlib
 import json
+import os
 from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
 import unittest
 
 import numpy as np
@@ -62,6 +67,38 @@ class ModelTests(unittest.TestCase):
         saved = json.loads((ROOT / "parameters" / "main.json").read_text())
         self.assertEqual(actual, saved)
         self.assertEqual(saved["n_networks"] * saved["n_trials_per_network"] ** 2, 4320)
+
+    def test_simulation_without_reference_inputs(self):
+        sources = (
+            "reproduce.py",
+            "morris_lecar_paired_alpha_compare_simplicial.py",
+            "morris_lecar_simplicial_paper_suite.py",
+            "morris_lecar_simplicial_paper_array.py",
+            "morris_lecar_simplicial_paper_array_chunked.py",
+            "morris_lecar_simplicial_prl_supplement_array.py",
+            "merge_morris_lecar_simplicial_chunks.py",
+        )
+        # A source-only directory rules out dependence on saved figure inputs.
+        with tempfile.TemporaryDirectory(prefix="ml_source_only_") as folder:
+            isolated = Path(folder)
+            for name in sources:
+                shutil.copy2(ROOT / name, isolated / name)
+            env = os.environ.copy()
+            env.pop("PYTHONPATH", None)
+            env["PYTHONDONTWRITEBYTECODE"] = "1"
+            env["ML_MAKE_PLOTS"] = "0"
+            completed = subprocess.run(
+                [sys.executable, "reproduce.py", "smoke"],
+                cwd=isolated, env=env, capture_output=True, text=True, timeout=120,
+            )
+            self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
+            output = isolated / "results" / "smoke"
+            rows = json.loads((output / "all_realizations.json").read_text())
+            self.assertEqual(len(rows), 32)
+            self.assertEqual({row["label"] for row in rows}, {"control", "higher_order"})
+            self.assertTrue(all(row["spike_count_total"] >= 0 for row in rows))
+            self.assertTrue((output / "aggregated_metrics.csv").is_file())
+            self.assertFalse((isolated / "reference_data").exists())
 
 
 if __name__ == "__main__":
