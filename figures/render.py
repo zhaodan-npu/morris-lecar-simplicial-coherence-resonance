@@ -63,7 +63,8 @@ def render(number, output):
     rows = read_table(TABLES[number])
     if number == 3:
         metadata = json.loads((DATA / "figure3_metadata.json").read_text())
-        print("Figure 3(e,f): recovered PDF coordinates, not identified raw simulation output.")
+        if not metadata.get("numerical_data_only") or metadata["tcor_csv_not_available"]:
+            raise ValueError("Figure 3 requires verified numerical input tables")
         return [module.draw(spec, rows) for spec in metadata["panels"]]
     if number == 4:
         return [module.draw(letter, alpha, rows) for letter, alpha in (("a", 1.5), ("b", 2.))]
